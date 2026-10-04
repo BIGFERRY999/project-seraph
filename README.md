@@ -1,73 +1,91 @@
-# 🌐 HELIOS C2
+# 🛰️ PROJECT SERAPH
 
 <div align="center">
 
+![Classification](https://img.shields.io/badge/SECURITY-TOP%20SECRET%20%2F%2F%20SI--TK%20%2F%2F%20REL%20TO%20SERAPH-ff0055.svg?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-00f0ff.svg?style=for-the-badge)
 ![Cesium](https://img.shields.io/badge/CesiumJS-1.124.0-4f46e5.svg?style=for-the-badge&logo=cesium)
 ![WebGL](https://img.shields.io/badge/WebGL-2.0_Hardware_Accelerated-10b981.svg?style=for-the-badge)
-![Vite](https://img.shields.io/badge/Vite-6.0-646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
-![Node](https://img.shields.io/badge/Node.js-24%2B-339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Tactical Standards](https://img.shields.io/badge/Standard-MIL--STD--2525D%20%7C%20CoT-eab308.svg?style=for-the-badge)
+![Voice Engine](https://img.shields.io/badge/Voice-100%25%20On--Device%20OmniVoice-a855f7.svg?style=for-the-badge)
 
-**Planetary Multi-Domain Situational Awareness & Tactical C4ISR Defense Platform**
+**Sovereign Multi-Domain C4ISR & Autonomous Tactical Air/Missile Defense Command Platform**
 
-*Real-time 3D planetary intelligence, multi-spectral sensor shaders, orbital conjunction physics, acoustic sonar telemetry, and autonomous DEFCON threat evaluation.*
+*Real-time 3D planetary intelligence, Keplerian ballistic & boost-glide hypersonic trajectory prediction, autonomous weapons-to-target assignment (WTA), 3D radar horizon & terrain masking, space domain awareness (SDA), and 100% air-gapped on-device neural voice command.*
 
-[Live Telemetry](#-multi-domain-telemetry-engine) • [Tactical HUD](#-tactical-hud--sensor-shaders) • [Architecture](#-system-architecture) • [Quick Start](#-quick-start)
+[Tactical Capabilities](#-core-tactical-capabilities) • [System Architecture](#-system-architecture) • [Voice & Hotkeys](#-tactical-hotkeys--voice-c2) • [Quick Start](#-quick-start) • [Security & Air-Gap](#-security--air-gap-compliance)
 
 </div>
 
 ---
 
-## 🛰️ Executive Overview
+## 🦅 Operational Overview
 
-**Helios C2** is an aerospace-grade Command & Control (C2) situational awareness platform operating directly inside the browser. It fuses distributed, high-throughput planetary telemetry streams into a synchronized photorealistic 3D WGS84 ellipsoid.
+**Project Seraph** (*Seraph Watch*) is an aerospace-grade Command, Control, Communications, Computers, Intelligence, Surveillance, and Reconnaissance (**C4ISR**) tactical battle management system operating in real-time within the browser. 
 
-By unifying air, space, maritime, and seismic sensor networks into a single operational picture, Helios C2 enables defense operators, researchers, and OSINT analysts to track global movements, calculate orbital conjunction risks, detect transponder anomalies, and monitor environmental crises at 60 FPS without commercial per-seat licensing.
+Engineered for strategic air defense commands, joint operations centers, and advanced intelligence fusion analysts, Seraph synthesizes distributed, high-throughput planetary telemetry across air, maritime, space, subsurface, and electronic warfare domains onto a millimeter-accurate photorealistic 3D WGS84 ellipsoid.
+
+### Key Architectural Pillars:
+* **True Kinetic Trajectory Physics**: Evaluates high-altitude sub-orbital ballistic parabolas (ICBM/IRBM) and non-ballistic atmospheric hypersonic boost-glide waveriders with real-time Time-To-Impact (TTI) countdowns and Circular Error Probable (CEP) ground hazard rings.
+* **Autonomous Battle Management (WTA)**: Solves the NP-hard Weapons-to-Target Assignment problem in milliseconds, calculating single-shot and dual-salvo Kill Probability ($P_k$) across integrated air defense batteries (Patriot PAC-3, Aegis SM-6, S-400, Arrow-3, Iron Dome).
+* **High-Fidelity Sensor Modeling**: Implements $4/3$ Earth atmospheric refraction radar horizons and 3D raycasted terrain elevation masking, identifying low-altitude nap-of-the-earth (NOE) cruise missile ingress corridors.
+* **Space Domain Awareness (SDA)**: Projects optical, SAR, and ELINT reconnaissance satellite ground swath cones over strategic installations and tracks co-orbital anti-satellite (ASAT) proximity conjunctions ($<50\text{ km}$).
+* **100% Air-Gapped & On-Device Voice C2**: Operates completely local speech recognition and low-latency neural OmniVoice synthesis—zero external audio streaming, zero cloud API reliance, zero telemetry leakage.
 
 ---
 
-## ⚡ Core Operational Capabilities
+## ⚡ Core Tactical Capabilities
 
 ```
-+-------------------------------------------------------------------------+
-|                              HELIOS C2                                  |
-|         Multi-Domain Command & Control Planetary Architecture           |
-+-------------------------------------------------------------------------+
-                                     |
-    +-----------------+--------------+---------------+----------------+
-    |                 |                              |                |
-    v                 v                              v                v
-[AIR DOMAIN]    [SPACE DOMAIN]               [MARITIME DOMAIN]   [CRISIS MATRIX]
-ADS-B Telemetry  CelesTrak GP Orbitals        AIS Vessel Feeds    USGS Seismic
-Altitude Gates   NORAD SGP4 Propagation       Dark Vessel Detect  NASA FIRMS
-Velocity Vectors Conjunction Risk Detection   Strait Chokepoints  Thermal Hotspots
++-----------------------------------------------------------------------------------+
+|                                  PROJECT SERAPH                                   |
+|             Autonomous Multi-Domain C4ISR Intelligence Fusion Platform            |
++-----------------------------------------------------------------------------------+
+                                          |
+    +-------------------+-----------------+-------------------+-----------------+
+    |                   |                                     |                 |
+    v                   v                                     v                 v
+[AIR & MISSILE]   [SPACE & RECON]                      [MARITIME DOMAIN]   [ELECTRONIC WARFARE]
+Ballistic Parabolas SGP4 Satellite Orbits              AIS Vessel Telemetry GPS Jamming Contours
+Hypersonic Gliders  Strategic Overflight Warning       Dark Vessel Detect   Spoofing Zones (SPOOF)
+WTA Pk Matrix Solv  Co-Orbital ASAT Conjunction (<50km) Chokepoint Corridors CoT / Cursor-on-Target
+Terrain Masking NOE Optical & SAR Sensor Swath Cones   Acoustic Sonar Ping  MIL-STD-2525D Symbology
 ```
 
-### 1. ✈️ Air Domain Telemetry (ADS-B Transponders)
-- **Live Flight Tracking**: Ingests real-time ADS-B transponder telemetry, rendering global civilian, commercial, and strategic military aircraft.
-- **Flight Stratigraphy**: Displays altitude, true airspeed (TAS), climb/descent rate, and projected heading tapes.
-- **Cockpit Chase Mode**: First-person pilot HUD and 3D chase camera tracking target aircraft over photorealistic terrain.
+### 1. 🚀 Ballistic & Hypersonic 3D Trajectory Predictor (`[Shift+B]`)
+- **Keplerian Sub-Orbital Parabolas**: Simulates ballistic missile trajectories up to $1,200\text{ km}$ apogees based on genuine orbital mechanics, computing apex, velocity vectors, and re-entry points.
+- **Hypersonic Waverider Flight Profiles**: Models non-ballistic high-Mach waveriders performing aerodynamic skip-glide maneuvers in the upper stratosphere ($30\text{–}60\text{ km}$).
+- **Time-To-Impact (TTI) & CEP Impact Footprint**: Calculates live impact countdown timers and renders elliptical Circular Error Probable ground hazard rings for early warning defense networks.
 
-### 2. 🛰️ Space Domain (CelesTrak Orbital Propagation)
-- **SGP4 Orbital Engine**: Real-time position calculation for thousands of active satellites, space stations (ISS, Tiangong), and trackable orbital debris.
-- **Conjunction Watch**: Monitors satellite orbit intersections and alerts on close orbital passes.
+### 2. 🎯 Autonomous Weapons-to-Target Assignment (WTA) Engine (`[Shift+W]`)
+- **Algorithmic Threat Pairing**: Evaluates active global Integrated Air & Missile Defense (IAMD) batteries against inbound saturation raid bogeys.
+- **Dynamic Kill Probability ($P_k$) Matrix**:
+  - Computes single-shot $P_k$ degraded by bogey Mach velocity and cross-aspect angles:
+    $$P_k = P_{\text{base}} \times \left(1 - \frac{M - 1}{15}\right) \times \left(1 - 0.35 \sin(\theta)\right)$$
+  - Calculates dual-salvo ripple fire probability of kill:
+    $$P_{k,\text{dual}} = 1 - (1 - P_k)^2$$
+- **Interception Geometry**: Verifies kinematic engagement envelopes for MIM-104 Patriot PAC-3 MSE, Aegis SM-6 Dual II, S-400 Triumf, Arrow-3, and Iron Dome units.
 
-### 3. 🚢 Maritime Domain (AIS Vessel Tracking)
-- **Global Marine Routes**: Tracks commercial tankers, bulk carriers, container ships, and naval vessels across vital maritime chokepoints (Suez, Malacca, Panama, Hormuz).
-- **Dark Vessel Heuristics**: Automatically flags anomalous transponder dropouts and unexpected speed/trajectory deviations.
+### 3. 📡 3D Radar Line-of-Sight & Terrain Elevation Masking (`[Shift+M]`)
+- **4/3 Earth Curvature Refraction**: Computes the atmospheric optical-to-radar horizon:
+  $$d_{\text{horizon}} \approx 4.12 \times \left(\sqrt{h_{\text{radar}}} + \sqrt{h_{\text{target}}}\right) \text{ km}$$
+- **Terrain Shadow Raycasting**: Samples terrain elevation along sensor-to-target sightlines to detect radar occlusion caused by mountain ridges and deep valleys.
+- **NOE Penetration Alerts**: Immediately flags low-altitude hostile bogeys flying nap-of-the-earth trajectories through radar blind zones.
 
-### 4. 🌋 Crisis & Environmental Matrix
-- **USGS Seismic Grid**: Triangulates real-time earthquake epicenters, depth, and Richter magnitude with animated seismic wave rings.
-- **NASA FIRMS Thermal Anomalies**: Near-real-time satellite thermal infrared detections highlighting active wildfires and industrial heat signatures.
+### 4. 🛰️ Space Domain Awareness & Overflight Warning (`[Shift+O]`)
+- **Reconnaissance Swath Projection**: Projects instantaneous geometric sensor ground cones for foreign optical, SAR, and SIGINT surveillance satellites.
+- **Facility Access Detection**: Automatically triggers overflight exposure warnings when foreign reconnaissance satellites pass over protected sovereign installations (Pentagon, STRATCOM Offutt AFB, NTTR Groom Lake, Ramstein AB, Yokosuka Naval Base, Pine Gap).
+- **Orbital Conjunction / ASAT Warning**: Continuously calculates pairwise Euclidean separations between space assets and generates high-priority alerts for co-orbital approaches under $50\text{ km}$.
 
-### 5. 🎯 Tactical HUD & Multi-Spectral Shaders
-- **FLIR Thermal Spectrum**: Simulates forward-looking infrared sensor views for target acquisition against terrain heat signatures.
-- **NVG Green Phosphor**: Intensified low-light night-vision tube simulation with peripheral vignette.
-- **CRT Phosphor Scanlines**: Curved tactical CRT monitor emulation with vintage raster scanlines.
-- **Cyber Sonar & Acoustic Engine**: Synthesizes periodic acoustic naval sonar pings (880 Hz decaying sine wave) and military radio squelch bursts via the Web Audio API.
+### 5. 📻 Electronic Warfare, GPS Jamming & Cursor-on-Target (CoT)
+- **GPS Jamming & Spoofing Contours**: Visualizes electronic warfare sectors (GPS NO-FIX, DENIED, and SPOOFING) in active conflict zones.
+- **Cursor-on-Target (CoT) Layer**: Ingests tactical MIL-STD CoT event streams with STANAG / MIL-STD-2525D combat symbology for joint force interoperability.
+- **Doppler Weather & Storm Tracking**: Displays real-time NEXRAD radar reflectivity and tropical cyclone predictive tracks.
 
-### 6. 🛡️ DEFCON Threat Matrix Engine
-- Real-time threat evaluation ticker scoring active contacts and assigning dynamic operational readiness states (DEFCON 5 through DEFCON 1).
+### 6. 🗣️ 100% On-Device Neural OmniVoice Control
+- **Air-Gapped Speech Architecture**: Local Web Speech API / PyAudio front-end paired with a local Python OmniVoice neural inference engine running on `http://127.0.0.1:8111`.
+- **Zero Cloud Dependence**: Operates completely offline without sending microphone audio, transcripts, or tactical state to OpenAI or any external third-party server.
+- **Operational SITREP Audio**: Live procedural generation of classified situational reports read aloud by a tactical neural voice operator.
 
 ---
 
@@ -75,89 +93,140 @@ Velocity Vectors Conjunction Risk Detection   Strait Chokepoints  Thermal Hotspo
 
 ```mermaid
 graph TD
-    subgraph Data Feeds
-        OpenSky[ADS-B Air Transponders]
-        AIS[AIS Marine Telemetry]
-        CelesTrak[NORAD Satellite Elements]
-        USGS[USGS Seismic Network]
-        FIRMS[NASA FIRMS Thermal Hotspots]
+    subgraph MultiDomainFeeds["Multi-Domain Telemetry Ingestion"]
+        ADSB["ADS-B Air Transponders (OpenSky / adsb.lol)"]
+        AIS["AIS Marine Vessel Telemetry (AISStream)"]
+        CelesTrak["NORAD SGP4 Satellite Ephemerides"]
+        CoT["Cursor-on-Target (CoT) Tactical Feeds"]
+        EW["Electronic Warfare / GPS Jamming Feeds"]
+        USGS["USGS Seismic & NASA FIRMS Thermal"]
+        Doppler["NOAA nowCOAST / NEXRAD Doppler Weather"]
     end
 
-    subgraph Server Middleware
-        Proxy[Vite Streaming Server & Rate Limiters]
-        Cache[Disk & In-Memory LRU Cache]
+    subgraph ServerLayer["Local Server Runtime"]
+        Vite["Vite Streaming Proxy & Middleware (Port 4173)"]
+        Cache["LRU Telemetry Cache & Rate Limiting"]
+        VoiceDaemon["Local OmniVoice Neural Daemon (Port 8111)"]
     end
 
-    subgraph Client Engine
-        Cesium[CesiumJS 3D Ellipsoid Engine]
-        Threat[Helios Threat Matrix & DEFCON Evaluator]
-        Audio[Web Audio Tactical Sonar Synthesizer]
-        Shaders[Multi-Spectral Post-Processing Shaders]
+    subgraph TacticalCore["Seraph Tactical Engines"]
+        Ballistic["Ballistic & Hypersonic 3D Predictor"]
+        WTA["Autonomous Weapons-to-Target Assignment"]
+        Terrain["3D Radar Horizon & Terrain Masking"]
+        SDA["Space Domain Awareness Engine"]
+        ThreatMatrix["DEFCON Threat Matrix & SITREP Engine"]
     end
 
-    OpenSky --> Proxy
-    AIS --> Proxy
-    CelesTrak --> Proxy
-    USGS --> Proxy
-    FIRMS --> Proxy
+    subgraph Visualization["Client 3D Canvas"]
+        Cesium["CesiumJS 3D Ellipsoid Engine (WGS84)"]
+        Shaders["Multi-Spectral Shaders (FLIR / NVG / CRT)"]
+        HUD["High-Tech Cyber HUD & World-Overlay"]
+        Audio["Web Audio Sonar Synthesizer & Local Voice C2"]
+    end
 
-    Proxy --> Cache
+    MultiDomainFeeds --> Vite
+    Vite --> Cache
     Cache --> Cesium
-    Cesium --> Threat
+    Cesium --> TacticalCore
+    TacticalCore --> HUD
+    TacticalCore --> Audio
+    VoiceDaemon <--> Audio
     Cesium --> Shaders
-    Threat --> Audio
 ```
+
+---
+
+## ⌨️ Tactical Hotkeys & Voice C2
+
+### Primary Keyboard Shortcuts
+
+| Shortcut | Function | Module |
+| :--- | :--- | :--- |
+| <kbd>Shift</kbd> + <kbd>B</kbd> | Toggle Ballistic & Hypersonic 3D Trajectory Predictor | `ballisticPredictor.js` |
+| <kbd>Shift</kbd> + <kbd>W</kbd> | Solve Autonomous Weapons-to-Target Assignment (WTA) | `tacticalWta.js` |
+| <kbd>Shift</kbd> + <kbd>M</kbd> | Toggle 3D Radar Line-of-Sight & Terrain Elevation Masking | `terrainMasking.js` |
+| <kbd>Shift</kbd> + <kbd>O</kbd> | Toggle Space Domain Awareness & Overflight Warning | `spaceDomainAwareness.js` |
+| <kbd>V</kbd> | Toggle Operator Voice C2 Session (Local OmniVoice) | `localVoiceSession.js` |
+| <kbd>T</kbd> | Toggle FLIR Thermal Multi-Spectral Post-Processing Shader | `scene.js` |
+| <kbd>N</kbd> | Toggle NVG Night Vision Phosphor Shader | `scene.js` |
+| <kbd>C</kbd> | Toggle Tactical CRT Scanline Post-Processing Shader | `scene.js` |
+| <kbd>1</kbd> – <kbd>5</kbd> | Set Operational Readiness State (DEFCON 1 through DEFCON 5) | `threatMatrix.js` |
+| <kbd>Space</kbd> | Generate Live Tactical Situation Report (SITREP) | `tacticalSitrep.js` |
+
+### Natural Voice Commands (100% On-Device)
+
+Press <kbd>V</kbd> or click the microphone indicator to issue commands hands-free:
+
+* *"Seraph, run ballistic trajectory"* → Activates 3D ballistic and waverider trajectory projections.
+* *"Seraph, solve WTA / weapons to target"* → Solves optimal IAMD intercept pairings and logs $P_k$.
+* *"Seraph, show terrain masking / radar horizon"* → Projects radar horizon frustums and highlights NOE bogeys.
+* *"Seraph, monitor satellite passes / space domain"* → Evaluates strategic facility overflight coverage.
+* *"Seraph, set DEFCON 2 / DEFCON 1"* → Updates operational readiness and acoustic alerts.
+* *"Seraph, generate situation report"* → Synthesizes and recites a real-time multi-domain SITREP.
+* *"Seraph, engage thermal vision / night vision"* → Swaps multi-spectral shader views.
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js 24+ (recommended) or 22+
-- npm or pnpm
+### 1. Prerequisites
+- **Node.js**: `24+` (recommended) or `22+`
+- **Python**: `3.10+` (for local OmniVoice neural server)
+- **Modern Browser**: Chrome / Edge / Brave with WebGL 2.0 acceleration enabled
 
-### Installation
+### 2. Clone & Install Dependencies
 ```bash
 # Clone the repository
 git clone https://github.com/freshstart2066-create/heliosc2.git
 
-# Navigate into project directory
+# Enter project directory
 cd heliosc2
 
-# Install dependencies
+# Install frontend and middleware dependencies
 npm install
 
-# Start the local tactical console
-npm run dev
+# (Optional) Install Python voice daemon dependencies
+pip install kokoro-onnx soundfile sounddevice pyttsx3 flask flask-cors
 ```
 
-The application boots on keyless satellite imagery and open elevation models out of the box. Open `http://localhost:4173` or the port displayed in your terminal.
+### 3. Launch Local Tactical Environment
+Start both the tactical C2 console and the on-device voice engine:
 
-### Production Build
 ```bash
-npm run build
-npm run preview
+# Terminal 1: Launch Project Seraph Frontend Console
+npm run dev
+
+# Terminal 2: Launch Local On-Device OmniVoice Daemon (Port 8111)
+python server/voice_server.py
+```
+
+Open your browser to:
+```
+http://localhost:4173/
+```
+The system will boot instantly into the **Seraph Tactical HUD** using keyless open elevation and satellite basemaps.
+
+### 4. Running Verification Test Suite
+Project Seraph enforces strict code health, zero Cesium label regressions, and tactical algorithmic correctness:
+
+```bash
+# Run the complete test suite (5,400+ unit & integration tests)
+npm test
+
+# Run the specialized tactical C4ISR engine test suite
+node --test src/layers/ballisticPredictor.test.mjs src/tacticalWta.test.mjs src/layers/terrainMasking.test.mjs src/layers/spaceDomainAwareness.test.mjs src/voice/localVoiceSession.test.mjs src/noCesiumLabels.test.mjs
 ```
 
 ---
 
-## ⚙️ Configuration & Optional Credentials
+## 🔒 Security & Air-Gap Compliance
 
-Helios C2 works with zero API keys required. Optional credentials can be placed in a `.env` file to unlock enhanced resolution layers:
-
-```env
-# Optional: Google Photorealistic 3D Tiles & Places
-GOOGLE_MAPS_API_KEY=your_key_here
-
-# Optional: Cesium ion Token (for Ion asset hosting)
-CESIUM_ION_TOKEN=your_token_here
-
-# Optional: Realtime Voice Control
-OPENAI_API_KEY=your_openai_key_here
-```
+* **Zero Cloud Audio Egress**: All microphone recordings and tactical intents remain on `localhost`. No WebRTC connections or audio data are ever transmitted to OpenAI or cloud LLM APIs.
+* **Strict Cesium Label Isolation**: To maintain high-frame-rate rendering under saturation raid conditions, all tactical identifiers are rendered via the dedicated HTML world-overlay rather than native Cesium labels, strictly passing `src/noCesiumLabels.test.mjs`.
+* **Fail-Soft Telemetry**: If external feeds encounter network degradation or upstream rate limits, Seraph seamlessly transitions to cached dead-reckoning kinematics and synthetic threat projections without interrupting C2 operations.
 
 ---
 
-## 📜 License & Compliance
+## 📜 License & Provenance
 
-Distributed under the **MIT License**. See `LICENSE` for details. Telemetry datasets fetched at runtime are governed by their respective public data policies (USGS, NASA, CelesTrak, OpenSky Network).
+Distributed under the **MIT License**. Third-party runtime telemetry feeds (NOAA, USGS, NASA FIRMS, CelesTrak, OpenSky, AISStream) are governed by their respective public data policies. See [`DATA_SOURCES.md`](DATA_SOURCES.md) for detailed attribution and licensing terms.

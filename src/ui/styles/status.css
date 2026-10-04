@@ -3,10 +3,11 @@
   position: fixed;
   top: 32px;
   left: 50%;
-  z-index: 100;
+  z-index: 105;
   display: flex;
   gap: 8px;
   transform: translateX(-50%);
+  pointer-events: auto;
 }
 
 #top-center-actions button {
@@ -16,16 +17,27 @@
   width: 36px;
   height: 36px;
   padding: 0;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.02) 65%
+    ),
+    rgba(6, 16, 26, 0.85);
+  border: 1px solid rgba(0, 212, 255, 0.28);
   border-radius: 50%;
   color: var(--text-secondary);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.45),
+    0 4px 12px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   transition:
     background-color var(--transition-fast),
     border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
     color var(--transition-fast),
     opacity var(--transition-fast),
     transform var(--transition-fast);
@@ -34,13 +46,27 @@
 
 #top-center-actions button:hover,
 #top-center-actions button:focus-visible {
-  border-color: var(--glass-border-hover);
-  background: rgba(255, 255, 255, 0.06);
-  transform: scale(1.1);
+  border-color: rgba(0, 212, 255, 0.75);
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(0, 212, 255, 0.16) 75%
+    ),
+    rgba(6, 20, 34, 0.95);
+  color: #38bdf8;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+    0 0 16px rgba(0, 212, 255, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.45);
+  transform: translateY(-1px) scale(1.06);
 }
 
 #top-center-actions button:active {
-  transform: scale(0.95);
+  transform: translateY(1px) scale(0.96);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.65),
+    0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 #top-center-actions button:disabled {
@@ -51,6 +77,24 @@
 
 #top-center-actions .material-symbols-outlined {
   font-size: 18px;
+}
+
+#tilt-map-view {
+  position: relative;
+}
+
+#tilt-map-view::after {
+  content: 'T';
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0.85;
 }
 
 #tilt-map-view[aria-pressed='true'] {
@@ -78,6 +122,24 @@
   font-size: 17px;
   transform: rotate(calc(-1 * var(--camera-heading)));
   transition: transform var(--transition-fast);
+}
+
+#reset-globe-view {
+  position: relative;
+}
+
+#reset-globe-view::after {
+  content: 'G';
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0.85;
 }
 
 #global-loading-status {
@@ -414,4 +476,169 @@
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
+}
+
+/* ── Tactical Recon Tour Button ──────────────── */
+#tactical-tour-btn {
+  position: fixed;
+  top: 78px;
+  right: 36px;
+  z-index: 105;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(0, 212, 255, 0.12) 40%,
+      rgba(0, 110, 255, 0.08) 100%
+    ),
+    rgba(6, 18, 30, 0.88);
+  border: 1px solid rgba(0, 212, 255, 0.5);
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #00f0ff;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.4),
+    0 4px 14px rgba(0, 0, 0, 0.35),
+    0 0 12px rgba(0, 212, 255, 0.2);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+  outline: none;
+}
+
+#tactical-tour-btn:hover,
+#tactical-tour-btn:focus-visible {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(0, 212, 255, 0.25) 50%,
+      rgba(0, 110, 255, 0.18) 100%
+    ),
+    rgba(6, 22, 38, 0.95);
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+    0 0 20px rgba(0, 212, 255, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+#tactical-tour-btn:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.6),
+    0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+#tactical-tour-btn.running {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(239, 68, 68, 0.25) 40%,
+      rgba(185, 28, 28, 0.2) 100%
+    ),
+    rgba(30, 8, 8, 0.9);
+  border-color: #ef4444;
+  color: #fca5a5;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+    0 0 18px rgba(239, 68, 68, 0.45),
+    0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme='light'] #tactical-tour-btn {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(14, 116, 144, 0.4);
+  color: #0284c7;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
+}
+
+:root[data-theme='light'] #tactical-tour-btn:hover,
+:root[data-theme='light'] #tactical-tour-btn:focus-visible {
+  background: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+}
+
+body.ui-clean-view #tactical-tour-btn,
+body.recording-mode #tactical-tour-btn {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ── Tactical AI SITREP Button ──────────────── */
+#tactical-sitrep-btn {
+  position: fixed;
+  top: 78px;
+  right: 175px;
+  z-index: 105;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(16, 185, 129, 0.18) 40%,
+      rgba(5, 150, 105, 0.12) 100%
+    ),
+    rgba(6, 24, 20, 0.88);
+  border: 1px solid rgba(16, 185, 129, 0.55);
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #34d399;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.4),
+    0 4px 14px rgba(0, 0, 0, 0.35),
+    0 0 12px rgba(16, 185, 129, 0.25);
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+#tactical-sitrep-btn:hover,
+#tactical-sitrep-btn:focus-visible {
+  border-color: #34d399;
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+    0 0 20px rgba(16, 185, 129, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+#tactical-sitrep-btn:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+body.ui-clean-view #tactical-sitrep-btn,
+body.recording-mode #tactical-sitrep-btn {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }

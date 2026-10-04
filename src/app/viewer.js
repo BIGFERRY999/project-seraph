@@ -106,7 +106,7 @@ export function installTrackpadPinchZoom(
 export function createApplicationViewer({ container, creditContainer }) {
   if (!container || !creditContainer)
     throw new TypeError('Viewer and credit containers are required');
-  const viewer = new Cesium.Viewer(container, {
+  const baseOptions = {
     timeline: false,
     animation: false,
     baseLayerPicker: false,
@@ -120,9 +120,38 @@ export function createApplicationViewer({ container, creditContainer }) {
     infoBox: false,
     baseLayer: false,
     creditContainer,
-    msaaSamples: 4,
-    contextOptions: { webgl: { preserveDrawingBuffer: true } },
-  });
+  };
+  let viewer;
+  try {
+    viewer = new Cesium.Viewer(container, {
+      ...baseOptions,
+      msaaSamples: 4,
+      contextOptions: { webgl: { preserveDrawingBuffer: true } },
+    });
+  } catch (error) {
+    console.warn(
+      '[Viewer] High-spec WebGL (MSAA 4) initialization failed, falling back:',
+      error,
+    );
+    try {
+      viewer = new Cesium.Viewer(container, {
+        ...baseOptions,
+        msaaSamples: 1,
+        contextOptions: {
+          webgl: {
+            preserveDrawingBuffer: true,
+            failIfMajorPerformanceCaveat: false,
+          },
+        },
+      });
+    } catch (fallbackError) {
+      console.warn(
+        '[Viewer] Fallback WebGL initialization failed, attempting minimal context:',
+        fallbackError,
+      );
+      viewer = new Cesium.Viewer(container, baseOptions);
+    }
+  }
   try {
     viewer.targetFrameRate = 60;
     // Before any tile builds a draw command: Cesium's per-vertex model

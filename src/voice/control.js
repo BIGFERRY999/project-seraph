@@ -12,7 +12,7 @@ export function createVoiceControl({ reset = false } = {}) {
     root.dataset.speaker = 'idle';
     root.innerHTML = `
       <div class="gev-voice-heading">
-        <div class="gev-voice-kicker">AI AGENT</div>
+        <div class="gev-voice-kicker">SERAPH // OMNIVOICE C2</div>
         <div id="gev-voice-status">OFF</div>
         <div class="gev-voice-cost">
           <button id="gev-voice-tier" class="gev-voice-tier-btn" type="button" aria-pressed="false" title="Voice model tier — applies next session">STD</button>
@@ -20,8 +20,14 @@ export function createVoiceControl({ reset = false } = {}) {
         </div>
       </div>
       <button id="gev-voice-button" type="button" aria-label="Voice control — activate to toggle voice; hold Space to speak" aria-describedby="gev-voice-help">
-        <span class="gev-mic-orbit"><img src="/mic.svg" alt="" /></span>
-        <span class="gev-mic-label">ON/OFF</span>
+        <span class="gev-mic-reticle-outer" aria-hidden="true"></span>
+        <span class="gev-mic-radar-sweep" aria-hidden="true"></span>
+        <span class="gev-mic-pulse-ring" aria-hidden="true"></span>
+        <span class="gev-mic-orbit">
+          <span class="gev-mic-core-glow" aria-hidden="true"></span>
+          <img src="/mic.svg" alt="" />
+        </span>
+        <span class="gev-mic-label"><span class="gev-mic-ptt-kicker">PTT COMMS</span><span class="gev-mic-state-txt">VOICE C2</span></span>
       </button>
       <div class="gev-voice-visualizer" aria-hidden="true">
         ${Array.from({ length: 15 }, (_, index) => `<span style="--bar:${index}"></span>`).join('')}

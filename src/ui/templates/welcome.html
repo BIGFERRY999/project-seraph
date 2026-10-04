@@ -4,34 +4,60 @@
        src/firstRunExperience.js for the full show policy. -->
   <aside id="first-run-launcher" role="dialog" aria-labelledby="first-run-title" aria-describedby="first-run-description" hidden>
     <div class="first-run-scanline" aria-hidden="true"></div>
+    <div class="first-run-classification" aria-hidden="true">
+      <span class="classification-badge">TOP SECRET // SI-TK // REL TO SERAPH</span>
+      <span class="classification-code">C4ISR-OPS-CON // LEVEL-5</span>
+    </div>
     <header class="first-run-header">
-      <span class="first-run-kicker">HELIOS C2 · TACTICAL OPS CONSOLE</span>
+      <span class="first-run-kicker">PROJECT SERAPH · STRATEGIC DEFENSE OPERATIONS</span>
+      <span class="first-run-network-status"><span class="status-pulse-dot"></span>SYS READY</span>
     </header>
-    <h2 id="first-run-title">Select Operational Mission</h2>
-    <p id="first-run-description">Multi-domain defense command & control: Real-time air, maritime, space, and planetary telemetry fusion.</p>
+    <h2 id="first-run-title">Tactical Mission Initialization</h2>
+    <p id="first-run-description">It feels like a forbidden cockpit—then you realize the sources are public and the data is real.</p>
     <div class="first-run-choices">
       <button type="button" data-first-run-choice="contacts">
         <span class="material-symbols-outlined" aria-hidden="true">radar</span>
-        <span><strong>LIVE CONTACTS</strong><small>Aircraft, vessels and nearby intelligence</small></span>
+        <span class="mission-text-block">
+          <span class="mission-title-row">
+            <strong>LIVE CONTACTS</strong>
+            <span class="mission-live-badge live-pulse">ADSB &amp; AIS STREAM</span>
+          </span>
+          <small>Real-time aircraft, maritime vessels and nearby tactical intelligence</small>
+        </span>
         <span class="material-symbols-outlined first-run-arrow" aria-hidden="true">arrow_forward</span>
       </button>
       <button type="button" data-first-run-choice="space-missions">
         <span class="material-symbols-outlined" aria-hidden="true">rocket_launch</span>
-        <span><strong>SPACE MISSIONS</strong><small>Launches, spacecraft and orbital context</small></span>
+        <span class="mission-text-block">
+          <span class="mission-title-row">
+            <strong>SPACE MISSIONS</strong>
+            <span class="mission-live-badge live-pulse">NORAD ORBITAL</span>
+          </span>
+          <small>Launches, spacecraft orbits and high-altitude space domain context</small>
+        </span>
         <span class="material-symbols-outlined first-run-arrow" aria-hidden="true">arrow_forward</span>
       </button>
       <button type="button" data-first-run-choice="environmental">
         <span class="material-symbols-outlined" aria-hidden="true">local_fire_department</span>
         <!-- Title text is painted from ENVIRONMENTAL_LABEL_CHOICE at init. -->
-        <!-- Subcopy names BOTH feeds this tile turns on, because the launcher
-             optimizes for the fully configured experience (owner ruling,
-             2026-08-23) — see the mission table in src/firstRunExperience.js. -->
-        <span><strong data-first-run-environmental-title>ENVIRONMENTAL</strong><small>Live earthquakes and active fires, from USGS and NASA</small></span>
+        <span class="mission-text-block">
+          <span class="mission-title-row">
+            <strong data-first-run-environmental-title>ENVIRONMENTAL</strong>
+            <span class="mission-live-badge">USGS &amp; NASA FIRMS</span>
+          </span>
+          <small>Live earthquakes and active fires, from USGS and NASA</small>
+        </span>
         <span class="material-symbols-outlined first-run-arrow" aria-hidden="true">arrow_forward</span>
       </button>
       <button type="button" class="first-run-explore" data-first-run-choice="explore">
         <span class="material-symbols-outlined" aria-hidden="true">public</span>
-        <span><strong>EXPLORE MANUALLY</strong><small>Begin with a clean globe</small></span>
+        <span class="mission-text-block">
+          <span class="mission-title-row">
+            <strong>EXPLORE MANUALLY</strong>
+            <span class="mission-live-badge badge-neutral">STANDBY</span>
+          </span>
+          <small>Begin with a clean photorealistic WGS84 digital twin globe</small>
+        </span>
         <span class="material-symbols-outlined first-run-arrow" aria-hidden="true">arrow_forward</span>
       </button>
     </div>

@@ -38,6 +38,16 @@ export function registerEntityContext(entity, metadata) {
   };
   entity.__gevContextId = metadata.id;
   store.entities.set(metadata.id, record);
+
+  // Live Tactical Anomaly & Threat Evaluation (Project Seraph)
+  if (typeof window !== 'undefined' && window.__threatMatrix?.evaluateContact) {
+    try {
+      window.__threatMatrix.evaluateContact(record);
+    } catch {
+      // Non-blocking
+    }
+  }
+
   return record;
 }
 

@@ -67,6 +67,10 @@
   color: #bdefff;
 }
 
+.location-mini-city.active-place {
+  animation: tactical-text-pulse 2s ease-in-out infinite;
+}
+
 .location-mini-poi {
   font-family: var(--font-mono);
   font-size: 8px;
@@ -76,6 +80,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.location-mini-poi.active-place {
+  color: var(--accent);
+  animation: tactical-text-pulse 2s ease-in-out infinite;
 }
 
 .location-pills {
@@ -131,6 +140,9 @@
   border-color: var(--accent);
   color: var(--accent);
   box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
+  animation:
+    tactical-continuous-glow 2s ease-in-out infinite,
+    tactical-text-pulse 2s ease-in-out infinite;
 }
 
 /* ── Expandable POI Row ──────────────────────── */
@@ -206,6 +218,7 @@
   background: var(--accent-dim);
   border-color: var(--accent);
   box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
+  animation: tactical-continuous-glow 2s ease-in-out infinite;
 }
 
 .poi-pill-name {
@@ -218,6 +231,7 @@
 
 .poi-pill.active .poi-pill-name {
   color: var(--accent);
+  animation: tactical-text-pulse 2s ease-in-out infinite;
 }
 
 .poi-pill-key {

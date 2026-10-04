@@ -2,7 +2,7 @@
   "name": "heliosc2",
   "private": true,
   "version": "2.0.0",
-  "description": "Helios C2 — Planetary Situational Awareness & Multi-Domain Defense Command & Control Platform. Real-time 3D geospatial intelligence, multi-domain telemetry fusion, and threat analysis.",
+  "description": "Project Seraph — Sovereign Multi-Domain C4ISR & Autonomous Tactical Air/Missile Defense Command Platform. Real-time 3D planetary intelligence, kinetic ballistic/hypersonic trajectory prediction, WTA, and on-device neural voice.",
   "type": "module",
   "license": "MIT",
   "author": "freshstart2066-create",
@@ -20,6 +20,13 @@
   "keywords": [
     "cesium",
     "3d-globe",
+    "c4isr",
+    "air-defense",
+    "ballistic-missile",
+    "hypersonic",
+    "wta",
+    "space-domain-awareness",
+    "radar-horizon",
     "geospatial",
     "osint",
     "spatial-intelligence",
@@ -28,7 +35,7 @@
     "ais",
     "satellites",
     "voice-control",
-    "openai-realtime",
+    "omnivoice",
     "visualization"
   ],
   "scripts": {
@@ -53,12 +60,20 @@
     "@jtarrio/webrtlsdr": "^3.0.6",
     "@mapbox/vector-tile": "^3.0.0",
     "@meri-imperiumi/eccodes-wasm": "^2.48.2",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.6.1",
     "cesium": "^1.124.0",
     "egm96-universal": "^1.1.1",
     "hls.js": "^1.7.3",
+    "lucide-react": "^1.49.0",
     "mgrs": "^2.1.0",
     "pbf": "^5.1.2",
-    "satellite.js": "^6.0.2"
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "satellite.js": "^6.0.2",
+    "tailwindcss": "^3.4.19",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "prettier": "3.9.6",

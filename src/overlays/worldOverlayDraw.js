@@ -646,12 +646,23 @@ function drawCardText(ctx, entry, placement, selected = false, topOffset = 0) {
   const details = Array.isArray(entry.details) ? entry.details : [];
   const x = placement.rect.x + (selected ? 12 : 9);
   let y = placement.rect.y + (selected ? 8 : 6) + topOffset;
-  ctx.fillStyle = WORLD_OVERLAY_STYLE.title;
+  if (selected) {
+    const now = globalThis.performance?.now?.() ?? Date.now();
+    const titlePulse = 0.5 + 0.5 * Math.sin(now / 320);
+    ctx.shadowColor = entry.accent || WORLD_OVERLAY_STYLE.accent;
+    ctx.shadowBlur = 6 + 10 * titlePulse;
+    ctx.fillStyle = '#ffffff';
+  } else {
+    ctx.fillStyle = WORLD_OVERLAY_STYLE.title;
+  }
   ctx.font = selected
     ? WORLD_OVERLAY_STYLE.fontSelected
     : WORLD_OVERLAY_STYLE.fontTitle;
   ctx.textBaseline = 'top';
   ctx.fillText(String(entry.title || ''), x, y);
+  if (selected) {
+    ctx.shadowBlur = 0;
+  }
   y += selected ? 15 : 13;
   ctx.fillStyle = WORLD_OVERLAY_STYLE.detail;
   ctx.font = WORLD_OVERLAY_STYLE.fontDetail;
@@ -827,12 +838,23 @@ export function paintTacticalCard(ctx, entry, placement, alpha = 1) {
 
   ctx.textAlign = 'left';
   ctx.textBaseline = 'alphabetic';
-  ctx.fillStyle = WORLD_OVERLAY_STYLE.title;
+  if (selected) {
+    const now = globalThis.performance?.now?.() ?? Date.now();
+    const titlePulse = 0.5 + 0.5 * Math.sin(now / 320);
+    ctx.shadowColor = accentColors.accent || WORLD_OVERLAY_STYLE.accent;
+    ctx.shadowBlur = 6 + 10 * titlePulse;
+    ctx.fillStyle = '#ffffff';
+  } else {
+    ctx.fillStyle = WORLD_OVERLAY_STYLE.title;
+  }
   ctx.font = selected
     ? WORLD_OVERLAY_STYLE.fontSelected
     : WORLD_OVERLAY_STYLE.fontTitle;
   const titleBaseline = y + layout.padY + layout.titleH - 2;
   ctx.fillText(String(entry.title || ''), x + layout.padX, titleBaseline);
+  if (selected) {
+    ctx.shadowBlur = 0;
+  }
   ctx.fillStyle = WORLD_OVERLAY_STYLE.detail;
   ctx.font = WORLD_OVERLAY_STYLE.fontDetail;
   for (let i = 0; i < details.length; i++) {
@@ -1020,9 +1042,14 @@ export function paintTracked(ctx, entry, placement, alpha = 1) {
   ctx.textBaseline = 'alphabetic';
   const centerX = x + w / 2;
   const titleBaseline = y + layout.padY + layout.titleH - 2;
-  ctx.fillStyle = WORLD_OVERLAY_STYLE.title;
+  const now = globalThis.performance?.now?.() ?? Date.now();
+  const titlePulse = 0.5 + 0.5 * Math.sin(now / 320);
+  ctx.shadowColor = accent;
+  ctx.shadowBlur = 6 + 10 * titlePulse;
+  ctx.fillStyle = '#ffffff';
   ctx.font = WORLD_OVERLAY_STYLE.fontTrackedTitle;
   ctx.fillText(String(entry.title || ''), centerX, titleBaseline);
+  ctx.shadowBlur = 0;
   ctx.fillStyle = WORLD_OVERLAY_STYLE.detail;
   ctx.font = WORLD_OVERLAY_STYLE.fontTrackedDetail;
   for (let i = 0; i < details.length; i++) {

@@ -135,6 +135,12 @@ export class LocationControls {
     const lines = locationMiniStatus(state);
     this.elements.statusCity.textContent = lines.city;
     this.elements.statusPoi.textContent = lines.poi;
+    const hasCity = Boolean(state?.city || state?.searchedLabel);
+    this.elements.statusCity.classList?.toggle?.('active-place', hasCity);
+    const hasPoi = Boolean(
+      state?.currentPoi || (state?.city && lines.poi !== '--'),
+    );
+    this.elements.statusPoi.classList?.toggle?.('active-place', hasPoi);
   }
   createOrbitIndicator() {
     if (this.destroyed) return null;

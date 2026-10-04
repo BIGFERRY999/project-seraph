@@ -349,6 +349,9 @@
 .military-awareness-subject {
   margin: 0 0 7px;
   color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  animation: tactical-text-pulse 2s ease-in-out infinite;
 }
 .military-awareness-controls {
   display: grid;
@@ -427,10 +430,12 @@
   cursor: default;
 }
 .military-awareness-target:hover,
-.military-awareness-target:focus-visible {
+.military-awareness-target:focus-visible,
+.military-awareness-target.active {
   color: #fff;
   outline: none;
   text-shadow: 0 0 8px rgba(114, 202, 255, 0.85);
+  animation: tactical-text-pulse 2s ease-in-out infinite;
 }
 .military-awareness-target:focus-visible {
   box-shadow: inset 0 -1px 0 #7fc8ff;

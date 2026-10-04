@@ -457,28 +457,165 @@
   transform: none;
 }
 
-/* Keep the microphone neutral at rest; cyan signals hover and live states. */
+/* Tactical Military Grade Microphone Sensor & PTT Module */
+#command-dock #gev-voice-button {
+  position: relative;
+  overflow: visible;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+  border: 0;
+  transition: transform var(--transition-fast);
+}
+
+#command-dock #gev-voice-button:active {
+  transform: scale(0.94);
+}
+
+/* Outer Compass Azimuth Reticle for PTT Pod */
+.gev-mic-reticle-outer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.35rem;
+  height: 3.35rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  pointer-events: none;
+  transition: border-color 200ms ease;
+}
+
+.gev-mic-reticle-outer::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px dotted rgba(0, 212, 255, 0.35);
+}
+
+#command-dock #gev-voice-control:hover .gev-mic-reticle-outer {
+  border-color: rgba(0, 212, 255, 0.55);
+}
+
+#command-dock #gev-voice-control:hover .gev-mic-reticle-outer::before {
+  border-color: rgba(0, 240, 255, 0.7);
+}
+
+/* Dynamic Acoustic Sonar Wave Rings */
+.gev-mic-pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 212, 255, 0.5);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#command-dock
+  #gev-voice-control:is(
+    [data-status='listening'],
+    [data-status='connecting'],
+    [data-status='executing']
+  )
+  .gev-mic-pulse-ring {
+  animation: gev-mic-sonar-wave 1.8s cubic-bezier(0.1, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes gev-mic-sonar-wave {
+  0% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.9;
+    border-color: #10b981;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.65);
+    opacity: 0;
+    border-color: rgba(16, 185, 129, 0);
+  }
+}
+
+/* Armored Transceiver Pod */
 #command-dock .gev-mic-orbit {
-  background: rgba(232, 234, 237, 0.04);
-  border-color: rgba(232, 234, 237, 0.36);
+  position: relative;
+  background: radial-gradient(
+    circle,
+    rgba(0, 240, 255, 0.22) 0%,
+    rgba(8, 26, 42, 0.95) 70%,
+    rgba(4, 14, 24, 1) 100%
+  );
+  border: 1.5px solid rgba(0, 212, 255, 0.6);
   box-shadow:
-    0 0 0 0.18rem rgba(232, 234, 237, 0.04),
-    0 0 0.75rem rgba(232, 234, 237, 0.08);
+    0 0 0 0.18rem rgba(0, 212, 255, 0.1),
+    0 0 1.2rem rgba(0, 212, 255, 0.3),
+    inset 0 0 0.7rem rgba(0, 212, 255, 0.22);
   transition:
     background var(--transition-fast),
     border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+/* Neon Core Aperture Glow */
+.gev-mic-core-glow {
+  position: absolute;
+  inset: 0.2rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 240, 255, 0.4) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0.7;
+  transition: all 180ms ease;
+}
+
+#command-dock #gev-voice-button:hover .gev-mic-core-glow {
+  opacity: 1;
+  transform: scale(1.1);
+  background: radial-gradient(
+    circle,
+    rgba(0, 240, 255, 0.6) 0%,
+    transparent 70%
+  );
 }
 
 #command-dock .gev-mic-orbit img {
-  filter: grayscale(1) saturate(0) brightness(1.65);
-  opacity: 0.68;
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.85));
+  opacity: 0.95;
+  z-index: 1;
   transition:
     filter var(--transition-fast),
-    opacity var(--transition-fast);
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-#command-dock #gev-voice-button:hover .gev-mic-orbit,
+#command-dock #gev-voice-button:hover .gev-mic-orbit {
+  background: radial-gradient(
+    circle,
+    rgba(0, 240, 255, 0.32) 0%,
+    rgba(10, 34, 54, 0.98) 100%
+  );
+  border-color: #00f0ff;
+  box-shadow:
+    0 0 0 0.22rem rgba(0, 212, 255, 0.25),
+    0 0 1.8rem rgba(0, 212, 255, 0.6),
+    inset 0 0 0.9rem rgba(0, 212, 255, 0.35);
+  transform: scale(1.06);
+}
+
+#command-dock #gev-voice-button:hover .gev-mic-orbit img {
+  filter: drop-shadow(0 0 11px #00f0ff);
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* Active Voice / Listening States */
 #command-dock
   #gev-voice-control:is(
     [data-status='connecting'],
@@ -486,14 +623,34 @@
     [data-status='executing']
   )
   .gev-mic-orbit {
-  background: rgba(0, 212, 255, 0.06);
-  border-color: rgba(0, 212, 255, 0.48);
+  background: radial-gradient(
+    circle,
+    rgba(16, 185, 129, 0.35) 0%,
+    rgba(6, 36, 26, 0.98) 100%
+  );
+  border-color: #10b981;
   box-shadow:
-    0 0 0 0.18rem rgba(0, 212, 255, 0.06),
-    0 0 0.9rem rgba(0, 212, 255, 0.12);
+    0 0 0 0.25rem rgba(16, 185, 129, 0.3),
+    0 0 2rem rgba(16, 185, 129, 0.7),
+    inset 0 0 1rem rgba(16, 185, 129, 0.4);
+  animation: gev-mic-sonar-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-#command-dock #gev-voice-button:hover .gev-mic-orbit img,
+#command-dock
+  #gev-voice-control:is(
+    [data-status='connecting'],
+    [data-status='listening']:not([data-microphone='muted']),
+    [data-status='executing']
+  )
+  .gev-mic-core-glow {
+  background: radial-gradient(
+    circle,
+    rgba(16, 185, 129, 0.7) 0%,
+    transparent 70%
+  );
+  opacity: 1;
+}
+
 #command-dock
   #gev-voice-control:is(
     [data-status='connecting'],
@@ -502,8 +659,76 @@
   )
   .gev-mic-orbit
   img {
-  filter: none;
+  filter: drop-shadow(0 0 10px #10b981);
   opacity: 1;
+}
+
+@keyframes gev-mic-sonar-ping {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(16, 185, 129, 0.7),
+      0 0 1.2rem rgba(16, 185, 129, 0.5);
+  }
+  70% {
+    box-shadow:
+      0 0 0 0.7rem rgba(16, 185, 129, 0),
+      0 0 2rem rgba(16, 185, 129, 0.2);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(16, 185, 129, 0),
+      0 0 1.2rem rgba(16, 185, 129, 0.5);
+  }
+}
+
+/* Rotating Radar Sweep on the Mic Button */
+#command-dock .gev-mic-radar-sweep {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.1rem;
+  height: 3.1rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 240, 255, 0.5);
+  pointer-events: none;
+  animation: gev-radar-sweep-spin 10s linear infinite;
+}
+
+#command-dock
+  #gev-voice-control:is([data-status='listening'], [data-status='connecting'])
+  .gev-mic-radar-sweep {
+  border-color: #10b981;
+  animation-duration: 2.2s;
+}
+
+@keyframes gev-radar-sweep-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.gev-mic-ptt-kicker {
+  display: block;
+  font-size: 0.36rem;
+  letter-spacing: 0.08em;
+  color: rgba(0, 240, 255, 0.75);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.gev-mic-state-txt {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.46rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 6px rgba(0, 240, 255, 0.7);
+  line-height: 1;
 }
 
 /* Match compact dock wings to the glass treatment used by left-panel buttons. */
@@ -539,14 +764,119 @@
     0 0 1rem rgba(0, 212, 255, 0.12);
 }
 
+/* ── Tactical Military HUD Command Dock Buttons ──────────────────────── */
+
+#command-dock :is(#location-bar, #control-panel) .dock-tray-toggle {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.32rem 0.6rem;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 28, 44, 0.72) 0%,
+    rgba(6, 16, 26, 0.88) 100%
+  );
+  border: 1px solid rgba(0, 212, 255, 0.28);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 140ms ease;
+}
+
+#command-dock :is(#location-bar, #control-panel) .dock-tray-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 212, 255, 0.4) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+#command-dock #location-bar .dock-tray-toggle:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 212, 255, 0.14) 0%,
+    rgba(8, 28, 46, 0.95) 100%
+  );
+  border-color: #00f0ff;
+  box-shadow:
+    0 0 16px rgba(0, 212, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+#command-dock #control-panel .dock-tray-toggle:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(168, 85, 247, 0.15) 0%,
+    rgba(18, 14, 38, 0.95) 100%
+  );
+  border-color: rgba(168, 85, 247, 0.85);
+  box-shadow:
+    0 0 16px rgba(168, 85, 247, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+#command-dock :is(#location-bar, #control-panel) .dock-tray-toggle:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+/* Expanded active state for dock wings */
+#command-dock #location-bar:not(.collapsed) .dock-tray-toggle {
+  border-color: #00f0ff;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 212, 255, 0.18) 0%,
+    rgba(4, 24, 40, 0.96) 100%
+  );
+  box-shadow:
+    0 0 18px rgba(0, 212, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+#command-dock #control-panel:not(.collapsed) .dock-tray-toggle {
+  border-color: #a855f7;
+  background: linear-gradient(
+    180deg,
+    rgba(168, 85, 247, 0.2) 0%,
+    rgba(20, 12, 42, 0.96) 100%
+  );
+  box-shadow:
+    0 0 18px rgba(168, 85, 247, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
 #command-dock #location-bar .location-toolbar {
   justify-content: flex-start;
   width: 100%;
 }
 
 #command-dock #location-bar .location-toolbar-label {
+  display: flex;
+  align-items: center;
   justify-content: flex-start;
   width: 100%;
+  gap: 0.45rem;
+  padding-bottom: 0;
   text-align: left;
 }
 
@@ -560,9 +890,262 @@
 }
 
 #command-dock #control-panel .panel-title {
+  display: flex;
+  align-items: center;
   justify-content: flex-end;
   width: 100%;
+  gap: 0.45rem;
+  padding-bottom: 0;
   text-align: right;
+}
+
+/* Tactical Icon Wrap (GPS reticle / Optical Aperture) */
+.dock-tactical-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  min-width: 1.55rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 212, 255, 0.18) 0%,
+    rgba(6, 18, 30, 0.9) 100%
+  );
+  border: 1px solid rgba(0, 212, 255, 0.48);
+  box-shadow:
+    0 0 8px rgba(0, 212, 255, 0.2),
+    inset 0 0 4px rgba(0, 212, 255, 0.2);
+  transition: all 180ms ease;
+}
+
+#command-dock #control-panel .dock-tactical-icon-wrap {
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.22) 0%,
+    rgba(14, 10, 28, 0.9) 100%
+  );
+  border-color: rgba(168, 85, 247, 0.55);
+  box-shadow:
+    0 0 8px rgba(168, 85, 247, 0.25),
+    inset 0 0 4px rgba(168, 85, 247, 0.2);
+}
+
+#command-dock #location-bar .dock-tray-toggle:hover .dock-tactical-icon-wrap {
+  border-color: #00f0ff;
+  box-shadow: 0 0 14px rgba(0, 212, 255, 0.6);
+  transform: scale(1.08);
+}
+
+#command-dock #control-panel .dock-tray-toggle:hover .dock-tactical-icon-wrap {
+  border-color: #a855f7;
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.6);
+  transform: scale(1.08);
+}
+
+.dock-reticle-ping {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#command-dock #control-panel .dock-reticle-ping {
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+#command-dock :is(#location-bar, #control-panel):hover .dock-reticle-ping {
+  animation: dock-reticle-pulse 1.8s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+@keyframes dock-reticle-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+/* Tactical Labels */
+.dock-label-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+#command-dock #location-bar .dock-label-content {
+  align-items: flex-start;
+  text-align: left;
+}
+
+#command-dock #control-panel .dock-label-content {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.dock-primary-title {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #d6f2fa;
+  text-shadow: 0 0 6px rgba(0, 212, 255, 0.45);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+#command-dock #location-bar .dock-tray-toggle:hover .dock-primary-title {
+  color: #00f0ff;
+  text-shadow: 0 0 8px #00f0ff;
+}
+
+#command-dock #control-panel .dock-tray-toggle:hover .dock-primary-title {
+  color: #e9d5ff;
+  text-shadow: 0 0 8px rgba(168, 85, 247, 0.8);
+}
+
+.dock-secondary-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.38rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(0, 212, 255, 0.65);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+#command-dock #control-panel .dock-secondary-kicker {
+  color: rgba(168, 85, 247, 0.75);
+}
+
+/* Status Pill & LED Diode */
+.dock-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 5px;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.28);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.42rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #a4ebff;
+  white-space: nowrap;
+}
+
+#command-dock #control-panel .dock-status-pill {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.35);
+  color: #e9d5ff;
+}
+
+.dock-status-dot {
+  width: 4.5px;
+  height: 4.5px;
+  border-radius: 50%;
+}
+
+.dock-status-dot-active {
+  background: #00ff88;
+  box-shadow: 0 0 6px #00ff88;
+  animation: dock-dot-pulse 1.6s ease-in-out infinite alternate;
+}
+
+.dock-status-dot-optics {
+  background: #a855f7;
+  box-shadow: 0 0 6px #a855f7;
+  animation: dock-dot-optics-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes dock-dot-pulse {
+  from {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.15);
+    box-shadow: 0 0 9px #00ff88;
+  }
+}
+
+@keyframes dock-dot-optics-pulse {
+  from {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.15);
+    box-shadow: 0 0 9px #a855f7;
+  }
+}
+
+/* Dynamic styling for active preset tags */
+#control-panel-active-tag[data-style='surveillance'] {
+  color: #10b981;
+  text-shadow: 0 0 6px #10b981;
+}
+
+#control-panel-active-tag[data-style='thermal'] {
+  color: #ff9800;
+  text-shadow: 0 0 6px #ff9800;
+}
+
+#control-panel-active-tag[data-style='retro'] {
+  color: #00ff66;
+  text-shadow: 0 0 6px #00ff66;
+}
+
+#control-panel-active-tag[data-style='noir'] {
+  color: #ffffff;
+  text-shadow: 0 0 6px #ffffff;
+}
+
+#control-panel-active-tag[data-style='snow'] {
+  color: #a0e9ff;
+  text-shadow: 0 0 6px #a0e9ff;
+}
+
+#control-panel-active-tag[data-style='anime'] {
+  color: #ff007f;
+  text-shadow: 0 0 6px #ff007f;
+}
+
+/* Chevrons */
+.dock-chevron-indicator {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: rgba(0, 212, 255, 0.75);
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 180ms ease;
+  user-select: none;
+}
+
+#command-dock #control-panel .dock-chevron-indicator {
+  color: rgba(168, 85, 247, 0.75);
+}
+
+#command-dock #location-bar:not(.collapsed) .dock-chevron-indicator {
+  transform: rotate(-90deg);
+  color: #00f0ff;
+  text-shadow: 0 0 8px #00f0ff;
+}
+
+#command-dock #control-panel:not(.collapsed) .dock-chevron-indicator {
+  transform: rotate(90deg);
+  color: #a855f7;
+  text-shadow: 0 0 8px #a855f7;
 }
 
 /* These must follow the shared wing skin so the visible borders stay joined. */

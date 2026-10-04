@@ -490,6 +490,7 @@ body.cockpit-mode:has(#left-panel-stack > .panel-collapsible:not(.collapsed))
 #cockpit-callsign {
   font-size: 18px;
   letter-spacing: 0.12em;
+  animation: tactical-text-pulse 2s ease-in-out infinite;
 }
 .cockpit-aircraft-meta {
   color: rgba(244, 251, 255, 0.48);
@@ -981,6 +982,7 @@ body.cockpit-mode #view-switcher button {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.12em;
+  animation: tactical-text-pulse 2s ease-in-out infinite;
 }
 .cockpit-context-qualifier {
   grid-column: 1 / -1;

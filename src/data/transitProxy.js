@@ -113,7 +113,7 @@ export function resolveTransitRoute(url) {
 export function transitUpstreamHeaders(feed, validators = null) {
   return {
     'User-Agent':
-      'helios-c2-transit-proxy/2.0 (+https://github.com/freshstart2066-create/heliosc2)',
+      'project-seraph-transit-proxy/2.0 (gods-eye-view-transit-proxy; +https://github.com/freshstart2066-create/heliosc2)',
     Accept: 'application/x-protobuf, application/octet-stream;q=0.9, */*;q=0.1',
     'Accept-Encoding': 'gzip',
     ...(validators?.etag ? { 'If-None-Match': validators.etag } : {}),

@@ -271,19 +271,21 @@
   height: 2.45rem;
   aspect-ratio: 1;
   box-sizing: border-box;
-  background: rgba(0, 212, 255, 0.06);
-  border: 1px solid rgba(0, 212, 255, 0.48);
   border-radius: 50%;
-  box-shadow:
-    0 0 0 0.18rem rgba(0, 212, 255, 0.06),
-    0 0 0.9rem rgba(0, 212, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #command-dock .gev-mic-label {
   display: block;
-  margin-top: 0.18rem;
-  font-size: 0.42rem;
-  letter-spacing: 0.035rem;
+  margin-top: 0.22rem;
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  font-weight: 700;
+  letter-spacing: 0.06rem;
+  color: #7feaff;
+  text-shadow: 0 0 6px rgba(0, 212, 255, 0.6);
 }
 
 #command-dock .gev-voice-visualizer {

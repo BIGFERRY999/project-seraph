@@ -73,8 +73,8 @@ export const STYLE_PRESET_DEFAULTS = {
     styleParams: {
       retro: {
         pixelation: 1.0,
-        distortion: 0,
-        instability: 0.42,
+        distortion: 0.04,
+        instability: 0.1,
       },
     },
     hudVariant: 'tactical',
@@ -86,9 +86,9 @@ export const STYLE_PRESET_DEFAULTS = {
     sharpen: { enabled: true, intensity: 49 },
     styleParams: {
       surveillance: {
-        gain: 0.18,
-        bloom: 0.22,
-        scanlineStr: 0.96,
+        gain: 0.38,
+        bloom: 0.18,
+        scanlineStr: 0.2,
         pixelation: 1.0,
       },
     },
@@ -102,8 +102,8 @@ export const STYLE_PRESET_DEFAULTS = {
     styleParams: {
       thermal: {
         sensitivity: 0.85,
-        bloom: 0.2,
-        mode: 0.33,
+        bloom: 0.18,
+        mode: 0.65,
         pixelation: 1.0,
       },
     },

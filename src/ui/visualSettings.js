@@ -1588,10 +1588,17 @@ export class VisualSettings {
   }
 
   _updateStyleMiniStatus(styleName = this.activeStyle) {
-    if (!this._styleMiniValue) return;
-    this._styleMiniValue.textContent =
+    const label =
       STYLE_STATUS_LABELS[styleName] ||
       String(styleName || 'normal').toUpperCase();
+    if (this._styleMiniValue) {
+      this._styleMiniValue.textContent = label;
+    }
+    const activeTag = document.getElementById('control-panel-active-tag');
+    if (activeTag) {
+      activeTag.textContent = label;
+      activeTag.dataset.style = styleName || 'normal';
+    }
   }
 
   _updateHudButtonState() {

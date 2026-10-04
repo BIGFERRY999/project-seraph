@@ -6,8 +6,22 @@
     <div class="panel-inner">
       <button id="control-panel-toggle" class="panel-header dock-tray-toggle" type="button"
         data-dock-toggle-target="control-panel" aria-expanded="false"
-        aria-controls="control-panel-popover" aria-label="Expand Visual Presets">
-        <span class="panel-title"><span class="dock-label-icon dock-label-icon-presets" aria-hidden="true"></span>VISUAL PRESETS</span>
+        aria-controls="control-panel-popover" aria-label="Expand Visual Presets" title="Expand Visual Presets">
+        <span class="panel-title">
+          <span class="dock-chevron-indicator" aria-hidden="true">‹</span>
+          <span class="dock-status-pill">
+            <span class="dock-status-dot dock-status-dot-optics"></span>
+            <span class="dock-status-tag" id="control-panel-active-tag" data-style="normal">NORMAL</span>
+          </span>
+          <span class="dock-label-content">
+            <span class="dock-primary-title">VISUAL PRESETS</span>
+            <span class="dock-secondary-kicker">FLIR // NVG // CRT</span>
+          </span>
+          <span class="dock-tactical-icon-wrap" aria-hidden="true">
+            <span class="dock-label-icon dock-label-icon-presets"></span>
+            <span class="dock-reticle-ping"></span>
+          </span>
+        </span>
         <span class="panel-divider"></span>
       </button>
       <div id="control-panel-popover" class="dock-popover-content">
@@ -70,7 +84,21 @@
     <div class="location-inner">
       <div class="location-toolbar">
         <button id="location-bar-toggle" class="dock-tray-toggle" type="button" data-dock-toggle-target="location-bar" aria-controls="location-bar-popover" aria-expanded="false" aria-label="Expand LOCATION" title="Expand LOCATION">
-          <span class="location-toolbar-label"><span class="dock-label-icon dock-label-icon-location" aria-hidden="true"></span>LOCATION</span>
+          <span class="location-toolbar-label">
+            <span class="dock-tactical-icon-wrap" aria-hidden="true">
+              <span class="dock-label-icon dock-label-icon-location"></span>
+              <span class="dock-reticle-ping"></span>
+            </span>
+            <span class="dock-label-content">
+              <span class="dock-primary-title">LOCATION</span>
+              <span class="dock-secondary-kicker">GEO NAV // POI</span>
+            </span>
+            <span class="dock-status-pill">
+              <span class="dock-status-dot dock-status-dot-active"></span>
+              <span class="dock-status-tag">GPS LOCK</span>
+            </span>
+            <span class="dock-chevron-indicator" aria-hidden="true">›</span>
+          </span>
         </button>
         <button class="panel-collapse-btn" data-collapse-target="location-bar" title="Collapse panel">+</button>
       </div>

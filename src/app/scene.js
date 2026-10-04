@@ -42,6 +42,11 @@ export async function createApplicationScene({
     });
   }
   loaderStatus.textContent = 'Configuring viewer...';
+  window.setSeraphLoadProgress?.(
+    50,
+    'CONFIGURING 3D ORBITAL VIEWPORT...',
+    'SYNCHRONIZING CANVAS',
+  );
   // Provider attribution stays visible, including clean-view and recording.
   const creditContainer = document.createElement('div');
   creditContainer.id = 'cesium-credits';
@@ -62,6 +67,13 @@ export async function createApplicationScene({
     googleApiKey || cesiumToken
       ? 'Loading Google 3D Tiles...'
       : 'Loading the keyless globe...';
+  window.setSeraphLoadProgress?.(
+    70,
+    googleApiKey || cesiumToken
+      ? 'STREAMING GOOGLE 3D TILES...'
+      : 'STREAMING PLANETARY GEOID...',
+    'BASEMAP ONLINE',
+  );
   const photoreal = await loadPhotorealisticTileset(Cesium, {
     googleApiKey,
     cesiumToken,
@@ -94,6 +106,11 @@ export async function createApplicationScene({
   }
 
   loaderStatus.textContent = 'Initializing systems...';
+  window.setSeraphLoadProgress?.(
+    85,
+    'INITIALIZING C4ISR TELEMETRY BUS...',
+    'ARMING DEFENSE SYSTEMS',
+  );
 
   const mapStackController = new MapController(viewer, {
     requestRender: governorRequestRender,

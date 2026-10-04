@@ -14,7 +14,7 @@ import {
  */
 const NOMINATIM_HEADERS = Object.freeze({
   'User-Agent':
-    'helios-c2/2.0 (+https://github.com/freshstart2066-create/heliosc2)',
+    'helios-c2/2.0 (gods-eye-view/2.0; +https://github.com/freshstart2066-create/heliosc2)',
   Referer: 'https://github.com/freshstart2066-create/heliosc2',
 });
 

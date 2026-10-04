@@ -59,6 +59,9 @@ import {
   DELDOT_CCTV_URL,
   DEFAULT_DELDOT_MAX_SOURCES,
   DELDOT_ANCHORS,
+  DEFAULT_WINDY_SOURCE_FILE,
+  WINDY_API_BASE_URL,
+  DEFAULT_WINDY_MAX_SOURCES,
 } from './constants.js';
 import {
   toFiniteNumber,
@@ -1696,6 +1699,161 @@ export async function loadDelDOTSourcesFromOpenData() {
   } catch (error) {
     console.warn(
       '[CCTV] DelDOT source download error:',
+      error?.message || error,
+    );
+    return [];
+  }
+}
+
+/**
+ * Load Windy Webcams (Webcams.travel) sources.
+ *
+ * If WINDY_API_KEY is configured in the environment, queries the live Windy
+ * Webcams API v3 for real-time cameras with fresh image tokens.
+ * Otherwise, loads the curated global catalog from config/cctv_sources.windy.json.
+ *
+ * @param {object} [options]
+ * @param {string} [options.sourceRoot=process.cwd()] - Project root directory.
+ * @returns {Promise<Array<object>>} Normalized camera source objects.
+ */
+export async function loadWindySourcesFromApiOrCatalog({
+  sourceRoot = process.cwd(),
+} = {}) {
+  const apiKey = process.env.WINDY_API_KEY?.trim();
+
+  // Path 1: Live API query if an API key is provided
+  if (apiKey) {
+    try {
+      const url = `${WINDY_API_BASE_URL}/webcams?include=images,location,urls&limit=100`;
+      const resp = await fetch(url, {
+        headers: {
+          Accept: 'application/json',
+          'x-windy-api-key': apiKey,
+          'User-Agent': 'gods-eye-view-cctv-proxy/1.0',
+        },
+        signal: AbortSignal.timeout(CCTV_SOURCE_FETCH_TIMEOUT_MS),
+      });
+
+      if (resp.ok) {
+        const data = await resp.json();
+        const webcams = Array.isArray(data?.webcams) ? data.webcams : [];
+        const cameras = [];
+
+        for (const cam of webcams) {
+          const lat = toFiniteNumber(cam.location?.latitude);
+          const lon = toFiniteNumber(cam.location?.longitude);
+          if (!isPlausibleLatLon(lat, lon)) continue;
+
+          const rawId = String(cam.webcamId || '').trim();
+          const cameraId = `windy-${rawId}`;
+          const snapshotUrl =
+            cam.images?.current?.preview ||
+            cam.images?.current?.thumbnail ||
+            cam.images?.current?.icon ||
+            '';
+
+          cameras.push({
+            id: cameraId,
+            name: cam.title || `Windy Cam ${rawId}`,
+            city: cam.location?.city || cam.location?.country || 'Global',
+            cityId: (cam.location?.country || 'windy')
+              .toLowerCase()
+              .replace(/[^a-z0-9]/g, '-'),
+            provider: 'Windy.com / Webcams.travel',
+            lat,
+            lon,
+            headingDeg: fallbackHeadingFromId(cameraId),
+            headingConfidence: 'low',
+            pitchDeg: -18,
+            fovDeg: 65,
+            rangeM: 400,
+            mountHeightM: 25,
+            groundElevationM: 10,
+            feedType: 'image',
+            url: cam.urls?.detail || `https://www.windy.com/webcams/${rawId}`,
+            snapshotUrl,
+            sourceKind: 'windy-api',
+            license: 'Windy.com / Webcams.travel API (CC BY 4.0)',
+            code: 'WINDY',
+            poseSource: 'curated',
+          });
+        }
+
+        if (cameras.length > 0) {
+          console.log(
+            `[CCTV] Loaded Windy API camera sources: ${cameras.length}`,
+          );
+          return cameras;
+        }
+      } else {
+        console.warn(`[CCTV] Windy API request returned status ${resp.status}`);
+      }
+    } catch (err) {
+      console.warn(
+        '[CCTV] Windy API fetch failed, falling back to curated catalog:',
+        err?.message || err,
+      );
+    }
+  }
+
+  // Path 2: Curated catalog file fallback
+  const sourceFile =
+    process.env.CCTV_WINDY_SOURCES_FILE || DEFAULT_WINDY_SOURCE_FILE;
+  const resolved = path.isAbsolute(sourceFile)
+    ? sourceFile
+    : path.resolve(sourceRoot, sourceFile);
+
+  try {
+    if (!fs.existsSync(resolved)) {
+      console.warn('[CCTV] Windy curated source file missing:', resolved);
+      return [];
+    }
+    const parsed = JSON.parse(fs.readFileSync(resolved, 'utf8'));
+    const rows = Array.isArray(parsed) ? parsed : [];
+    const cameras = [];
+
+    for (const item of rows) {
+      if (!item || typeof item !== 'object') continue;
+      const id = String(item.id || '').trim();
+      const lat = toFiniteNumber(item.lat);
+      const lon = toFiniteNumber(item.lon);
+      if (!id || !isPlausibleLatLon(lat, lon)) continue;
+
+      cameras.push({
+        id,
+        name: String(item.name || id).trim(),
+        city: String(item.city || 'Global'),
+        cityId: String(item.cityId || 'windy'),
+        provider: String(item.provider || 'Windy.com / Webcams.travel'),
+        lat,
+        lon,
+        headingDeg: toFiniteNumber(item.headingDeg, 0),
+        headingConfidence: String(item.headingConfidence || 'high'),
+        pitchDeg: toFiniteNumber(item.pitchDeg, -20),
+        fovDeg: toFiniteNumber(item.fovDeg, 65),
+        rangeM: toFiniteNumber(item.rangeM, 500),
+        mountHeightM: toFiniteNumber(item.mountHeightM, 30),
+        groundElevationM: toFiniteNumber(item.groundElevationM, 15),
+        feedType: 'image',
+        url: typeof item.url === 'string' ? item.url : '',
+        snapshotUrl:
+          typeof item.snapshotUrl === 'string' ? item.snapshotUrl : '',
+        sourceKind: String(item.sourceKind || 'windy-curated'),
+        license: String(
+          item.license || 'Windy.com / Webcams.travel — CC BY 4.0',
+        ),
+        code: cameraDisplayCode(item.code || 'WINDY'),
+        poseSource: 'curated',
+      });
+    }
+
+    console.log(
+      `[CCTV] Loaded Windy curated camera sources: ${cameras.length}`,
+    );
+    return cameras;
+  } catch (error) {
+    console.warn(
+      '[CCTV] Windy source catalog read error:',
       error?.message || error,
     );
     return [];

@@ -268,13 +268,14 @@
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: var(--bg-dark);
+  background: radial-gradient(circle at center, #0a1118 0%, #03070b 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   transition:
-    opacity 0.8s ease,
-    visibility 0.8s ease;
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
 }
 
 #loading-screen.hidden {
@@ -285,21 +286,24 @@
 
 .loader-content {
   text-align: center;
+  max-width: 480px;
+  width: 90%;
+  padding: 24px;
 }
 
 .loader-logo {
   display: block;
-  width: 128px;
+  width: 110px;
   height: auto;
-  margin: 0 auto 24px;
-  filter: drop-shadow(0 0 24px rgba(0, 246, 255, 0.42));
+  margin: 0 auto 20px;
+  filter: drop-shadow(0 0 24px rgba(0, 240, 255, 0.5));
   animation: logo-pulse 2s ease-in-out infinite;
 }
 
 @keyframes logo-pulse {
   0%,
   100% {
-    opacity: 0.72;
+    opacity: 0.8;
     transform: scale(0.98);
   }
   50% {
@@ -310,19 +314,51 @@
 
 .loader-content h2 {
   font-family: var(--font-mono);
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 6px;
-  color: var(--text-primary);
-  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  color: #ffffff;
+  margin-bottom: 16px;
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+.loader-progress-track {
+  width: 260px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  margin: 16px auto 12px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.15) inset;
+}
+
+.loader-progress-bar {
+  height: 100%;
+  width: 25%;
+  background: linear-gradient(90deg, #0096c7, #00f0ff);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+  border-radius: 2px;
+  transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .loader-status {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 2px;
-  color: var(--text-dim);
-  animation: pulse 2s ease-in-out infinite;
+  letter-spacing: 2.5px;
+  color: #00f0ff;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.loader-substatus {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
 }
 
 @keyframes pulse {

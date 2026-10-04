@@ -268,3 +268,8 @@ export const CCTV_MEDIA_FETCH_TIMEOUT_MS = 15 * 1000;
 export const CCTV_MEDIA_IDLE_TIMEOUT_MS = 30 * 1000;
 /** Declared size ceiling for fixed media responses. */
 export const CCTV_MEDIA_MAX_BODY_BYTES = 64 * 1024 * 1024;
+
+/** Windy Webcams (Webcams.travel) provider constants. */
+export const DEFAULT_WINDY_SOURCE_FILE = 'config/cctv_sources.windy.json';
+export const WINDY_API_BASE_URL = 'https://api.windy.com/webcams/api/v3';
+export const DEFAULT_WINDY_MAX_SOURCES = 500;
